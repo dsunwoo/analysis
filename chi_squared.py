@@ -10,9 +10,9 @@ loansData.dropna(inplace=True)
 
 freq = collections.Counter(loansData['Open.CREDIT.Lines'])
 
-#plt.figure()
-#plt.bar(freq.keys(), freq.values(), width=1)
-#plt.savefig('./graphs/hist_open_credit_lines')
+plt.figure()
+plt.bar(freq.keys(), freq.values(), width=1)
+plt.savefig('./graphs/hist_open_credit_lines')
 
 chi, p = stats.chisquare(list(freq.values()))
 

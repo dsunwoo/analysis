@@ -28,7 +28,5 @@ for col in datacols:
     graph = stats.probplot(loansData[col], dist="norm", plot=plt)
     fig.suptitle('{}'.format(col), fontsize=20)
     plt.savefig('./graphs/prob_{}.png'.format(col))
-#plt.figure()
-#graph = stats.probplot(loansData['Amount.Requested'], dist="norm", plot=plt)
-#plt.savefig('loan_prob.png')
+
 
