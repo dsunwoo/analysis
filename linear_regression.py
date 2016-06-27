@@ -4,32 +4,32 @@ import matplotlib.pyplot as plt
 import numpy as np
 import statsmodels.api as sm
 
-loansData = pd.read_csv('https://github.com/Thinkful-Ed/curric-data-001-data-sets/raw/master/loans/loansData.csv')
+df = pd.read_csv('https://github.com/Thinkful-Ed/curric-data-001-data-sets/raw/master/loans/loansData.csv')
 # Drop null rows
-loansData.dropna(inplace=True)
+df.dropna(inplace=True)
 # List of column headers
-column_names = list(loansData.columns.values)
+column_names = list(df.columns.values)
 
 # Convert data into usable numeric values
 # remove '%' from Interest.Rate column
-loansData['Interest.Rate'] = loansData['Interest.Rate'].map(lambda x: x.rstrip('%')).apply(float)
+df['Interest.Rate'] = df['Interest.Rate'].map(lambda x: x.rstrip('%')).apply(float)
 # remove 'months' from Loan.Length column
-loansData['Loan.Length'] = loansData['Loan.Length'].map(lambda x: x.rstrip('months')).apply(int)
+df['Loan.Length'] = df['Loan.Length'].map(lambda x: x.rstrip('months')).apply(int)
 # replace '-' with ',' in FICO.Range column
-loansData['FICO.Score'] = [x.replace('-', ',') for x in loansData['FICO.Range']]
-loansData['FICO.Score'] = loansData['FICO.Score'].str.split(',').apply(min).apply(float)
+df['FICO.Score'] = [x.replace('-', ',') for x in df['FICO.Range']]
+df['FICO.Score'] = df['FICO.Score'].str.split(',').apply(min).apply(float)
 # Save the cleaned data
-loansData.to_csv('loansData_clean.csv', header=True, index=False)
+df.to_csv('loansData_clean.csv', header=True, index=False)
 
 plt.figure()
-p = loansData['FICO.Score'].hist()
+p = df['FICO.Score'].hist()
 #plt.show()
 
-a = pd.scatter_matrix(loansData, alpha=0.05, figsize=(10, 10), diagonal='hist')
+a = pd.scatter_matrix(df, alpha=0.05, figsize=(10, 10), diagonal='hist')
 
-intrate = loansData['Interest.Rate']
-loanamt = loansData['Amount.Requested']
-fico = loansData['FICO.Score']
+intrate = df['Interest.Rate']
+loanamt = df['Amount.Requested']
+fico = df['FICO.Score']
 # The dependent variable
 y = np.matrix(intrate).transpose()
 
